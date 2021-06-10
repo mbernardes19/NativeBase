@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { TouchableOpacity, Platform } from 'react-native';
 import { connectStyle } from 'native-base-shoutem-theme';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from '../basic/IconNB';
 
 import mapPropsToStyleNames from '../utils/mapPropsToStyleNames';
 import variable from '../theme/variables/platform';
@@ -33,6 +33,7 @@ class Radio extends Component {
         {Platform.OS === 'ios' && !this.props.standardStyle ? (
           this.props.selected && (
             <Icon
+              type={this.props.iconType}
               style={{
                 color: this.props.selectedColor
                   ? this.props.selectedColor
@@ -46,6 +47,7 @@ class Radio extends Component {
           )
         ) : (
           <Icon
+            type={this.props.iconType}
             style={{
               color:
                 Platform.OS === 'ios'
