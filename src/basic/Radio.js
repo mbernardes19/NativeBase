@@ -72,8 +72,8 @@ class Radio extends Component {
                   ? 'ios-radio-button-on'
                   : 'ios-radio-button-off'
                 : this.props.selected
-                ? 'radio-button-on'
-                : 'radio-button-off'
+                ? 'radiobox-marked'
+                : 'radiobox-blank'
             }
           />
         )}
