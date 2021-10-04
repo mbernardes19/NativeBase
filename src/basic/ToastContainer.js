@@ -58,14 +58,17 @@ class ToastContainer extends Component {
     });
   }
 
+  keyboardDidShowSubscription = null;
+  keyboardDidHideSubscription = null;
+
   componentDidMount() {
     Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
     Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
   }
 
   componentWillUnmount() {
-    Keyboard.removeListener('keyboardDidShow', this.keyboardDidShow);
-    Keyboard.removeListener('keyboardDidHide', this.keyboardDidHide);
+    this.keyboardDidShowSubscription.remove();
+    this.keyboardDidHideSubscription.remove();
   }
 
   getToastStyle() {
@@ -176,6 +179,7 @@ class ToastContainer extends Component {
   }
 
   render() {
+    console.log('HEY')
     if (this.state.modalVisible) {
       const { x, y } = this.state.pan;
       return (
@@ -196,7 +200,10 @@ class ToastContainer extends Component {
             {this.state.buttonText && (
               <Button
                 style={this.state.buttonStyle}
-                onPress={() => this.closeToast('user')}
+                onPress={() => {
+                  console.log('PRESSED');
+                  this.closeToast('user')
+                }}
               >
                 <Text style={this.state.buttonTextStyle}>
                   {this.state.buttonText}
