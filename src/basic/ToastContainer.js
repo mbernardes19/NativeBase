@@ -6,6 +6,7 @@ import {
   Animated,
   ViewPropTypes,
   PanResponder,
+  TouchableNativeFeedback
 } from 'react-native';
 import { connectStyle } from 'native-base-shoutem-theme';
 
@@ -183,12 +184,15 @@ class ToastContainer extends Component {
     if (this.state.modalVisible) {
       const { x, y } = this.state.pan;
       return (
-        <Animated.View
-          {...this.state.swipeDisabled ? {} : this._panResponder.panHandlers}
+        <TouchableNativeFeedback
           style={[
             this.getToastStyle(),
             { transform: [{ translateX: x }, { translateY: y }] },
           ]}
+          onPress={() => {
+            console.log('PRESSED CONTAINER');
+            this.closeToast('user');
+          }}
         >
           <Toast
             style={[this.state.style]}
@@ -201,8 +205,8 @@ class ToastContainer extends Component {
               <Button
                 style={this.state.buttonStyle}
                 onPress={() => {
-                  console.log('PRESSED');
-                  this.closeToast('user')
+                  console.log('PRESSED INNER');
+                  this.closeToast('user');
                 }}
               >
                 <Text style={this.state.buttonTextStyle}>
@@ -211,7 +215,7 @@ class ToastContainer extends Component {
               </Button>
             )}
           </Toast>
-        </Animated.View>
+        </TouchableNativeFeedback>
       );
     }
     return null;
